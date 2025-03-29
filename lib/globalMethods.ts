@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/require-await */
+
 'use server';
 
 import crypto from 'crypto-js';

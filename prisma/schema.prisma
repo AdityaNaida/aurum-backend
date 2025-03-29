@@ -32,29 +32,10 @@ model User{
 }
 
 
-model Admin{
-    id          Int     @id @default(autoincrement())
-    username    String  @unique
-    password    String  
-    question    String  @default("apple")
-    superuser   Boolean @default(false)
-    roles       Json    @default("{\"permission\": {\"read\": true, \"edit\": false, \"delete\": false}}")
+model Admin {
+  id        Int     @id @default(autoincrement())
+  username  String  @unique
+  password  String
+  question  String
+  superuser Boolean @default(false)
 }
-
-
-// model Order {
-//   id    String @id @unique
-
-//   customerId    Int
-
-//   totalAmount Int
-
-//   createdAt          DateTime @default(now())
-//   orderedAt          DateTime
-//   gateway            Gateway  @default(RAZORPAY)
-//   gatewayPaymentId   String
-//   gatewayOrderId     String
-//   gatewaySignature   String?
-//   isPaidSuccessfully Boolean  @default(false)
-//   paidAfterRetry     Boolean  @default(false)
-// }
