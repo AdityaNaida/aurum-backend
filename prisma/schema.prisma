@@ -32,6 +32,15 @@ model User{
 }
 
 
+model Admin{
+    id          Int     @id @default(autoincrement())
+    username    String  @unique
+    password    String  
+    question    String  @default("apple")
+    superuser   Boolean @default(false)
+    roles       Json    @default("{\"permission\": {\"read\": true, \"edit\": false, \"delete\": false}}")
+}
+
 
 // model Order {
 //   id    String @id @unique
