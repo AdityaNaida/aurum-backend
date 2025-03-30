@@ -6,6 +6,8 @@ import { UsersModule } from './users/users.module';
 import * as redisStore from 'cache-manager-redis-store';
 import { ConfigModule } from '@nestjs/config';
 import { AdminModule } from './admin/admin.module';
+import { FolderService } from './folder/folder.service';
+import { FolderModule } from './folder/folder.module';
 
 @Module({
   imports: [
@@ -24,8 +26,10 @@ import { AdminModule } from './admin/admin.module';
     UsersModule,
 
     AdminModule,
+
+    FolderModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, FolderService],
 })
 export class AppModule {}

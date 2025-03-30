@@ -1,12 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
-  output = "../../node_modules/.prisma/client"
+  output   = "../../node_modules/.prisma/client"
 }
 
 datasource db {
@@ -14,23 +8,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Gateway {
-  RAZORPAY
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  email     String?  @unique
+  mobile    String?  @unique
+  password  String?
+  createdAt DateTime @default(now())
+  lastLogin DateTime @default(now())
 }
-
-
-model User{
-  id          Int @id @default(autoincrement())
-
-  name        String?
-  email       String?  @unique
-  mobile      String? @unique
-  password    String?
-
-  createdAt   DateTime @default(now())
-  lastLogin   DateTime @default(now())
-}
-
 
 model Admin {
   id        Int     @id @default(autoincrement())
@@ -39,3 +25,22 @@ model Admin {
   question  String
   superuser Boolean @default(false)
 }
+
+model Folder {
+  id         Int      @id @default(autoincrement())
+  folderName String   @unique
+  color      String   @default("Blue")
+  createdAt  DateTime @default(now())
+  images     Image[]
+}
+
+model Image {
+  id         Int      @id @default(autoincrement())
+  fileName   String
+  folder     Int
+  imageURL   String
+  createdAt  DateTime @default(now())
+  folderData Folder   @relation(fields: [folder], references: [id])
+}
+
+
